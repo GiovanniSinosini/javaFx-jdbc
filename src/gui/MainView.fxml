@@ -3,31 +3,32 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainViewController">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="505.0">
+   <content>
+      <VBox prefHeight="298.0" prefWidth="468.0">
          <children>
-            <VBox prefHeight="361.0" prefWidth="503.0">
-               <children>
-                  <MenuBar prefHeight="369.0" prefWidth="503.0">
-                    <menus>
-                      <Menu mnemonicParsing="false" text="Registration">
-                        <items>
-                          <MenuItem fx:id="menuItemSeller" mnemonicParsing="false" onAction="#onMenuItemSellerAction" text="Seller" />
-                              <MenuItem fx:id="menuItemDepartment" mnemonicParsing="false" onAction="#onMenuItemDepartmentAction" text="Department" />
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Help">
-                        <items>
-                          <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" onAction="#onMenuItemABoutAction" text="About" />
-                        </items>
-                      </Menu>
-                    </menus>
-                  </MenuBar>
-               </children>
-            </VBox>
-         </children></AnchorPane>
-  </content>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Registration">
+                  <items>
+                    <MenuItem fx:id="menuItemSeller" mnemonicParsing="false" onAction="#onMenuItemSellerAction" text="Seller" />
+                        <MenuItem fx:id="menuItemDepartment" mnemonicParsing="false" onAction="#onMenuItemDepartmentAction" text="Department" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" onAction="#onMenuItemABoutAction" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </VBox>
+   </content>
 </ScrollPane>
