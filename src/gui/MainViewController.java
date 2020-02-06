@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import application.Main;
 import gui.util.Alerts;
@@ -34,11 +35,14 @@ public class MainViewController implements Initializable {
 	}
 	@FXML
 	public void onMenuItemDepartmentAction() {
-		loadView2("/gui/DepartMentList.fxml");
+		loadView("/gui/DepartMentList.fxml", (DepartmentListController controller) -> {  // action initialization
+			controller.setDepartmentService (new DepartmentService());
+			controller.updateTableView();  // create dependency with list
+		});
 	}
 	@FXML
 	public void onMenuItemABoutAction() {
-		loadView("/gui/About.fxml");
+		loadView("/gui/About.fxml", x -> {});
 	}
 	
 	
@@ -47,7 +51,7 @@ public class MainViewController implements Initializable {
 		
 	}
 	
-	private synchronized void loadView(String absoluteName) {   // synchronized = ensures that it is not interrupted
+	private synchronized <T> void loadView(String absoluteName, Consumer<T> InitializingAction) {   // synchronized = ensures that it is not interrupted  -  <T> = generic - Consumer<T> InitializingAction = generic function
 		try {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 		VBox newVBox = loader.load();
@@ -60,32 +64,12 @@ public class MainViewController implements Initializable {
 		mainVBox.getChildren().add(mainMenu); 
 		mainVBox.getChildren().addAll(newVBox.getChildren()); 
 		
-		}
-		catch (IOException e) {
-			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
-		}
-	}
-	private synchronized void loadView2(String absoluteName) {   // synchronized = ensures that it is not interrupted
-		try {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-		VBox newVBox = loader.load();
-		
-		Scene mainScene = Main.getMainScene(); // load the main
-		VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent(); // getRoot = load first element (ScrollPane)  - getContente = next element 
-		
-		Node mainMenu = mainVBox.getChildren().get(0); // first element within "children" (menuBar) = storing menuBar in a variable
-		mainVBox.getChildren().clear();
-		mainVBox.getChildren().add(mainMenu); 
-		mainVBox.getChildren().addAll(newVBox.getChildren()); 
-		
-		DepartmentListController controller = loader.getController();  // create dependency with provisional list
-		controller.setDepartmentService(new DepartmentService());
-		controller.updateTableView();
+		T controller = loader.getController(); // will return the controller of the "T controller" (generic type = which in this case is "DepartmentListController")
+		InitializingAction.accept(controller);   // run the controller returned above
 		
 		}
 		catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
 	}
-
 }
