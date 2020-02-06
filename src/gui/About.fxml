@@ -18,7 +18,7 @@
             <Insets bottom="10.0" left="20.0" top="10.0" />
          </padding>
       </Label>
-      <Label contentDisplay="TOP" prefHeight="17.0" prefWidth="188.0" text="JavaFx application demo">
+      <Label contentDisplay="TOP" prefHeight="17.0" prefWidth="188.0" text="JavaFx application demo - by Giovanni Carvalho Sinosini">
          <VBox.margin>
             <Insets />
          </VBox.margin>
