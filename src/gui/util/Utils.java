@@ -10,4 +10,14 @@ public class Utils {
 		return (Stage) ((Node) event.getSource()).getScene().getWindow(); // to access the button stage
 	}
 
+	public static Integer tryParseToInt(String str) { // convert text field content to integer
+		try {
+			return Integer.parseInt(str);
+		}
+		catch (NumberFormatException e) {
+			return null;
+		}
+	}
+	
+	
 }
