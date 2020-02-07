@@ -22,4 +22,9 @@ public class DepartmentService {
 			dao.update(obj);
 		}
 	}
+	
+	public void remove(Department obj) {   // remove department from database
+		dao.deleteById(obj.getId());
+		
+	}
 }
