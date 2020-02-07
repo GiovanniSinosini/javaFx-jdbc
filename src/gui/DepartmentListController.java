@@ -48,7 +48,8 @@ public class DepartmentListController implements Initializable{
 	@FXML
 	public void onBtNewAction(ActionEvent event) {   // ActionEvent event = argument to identify the controller
 		Stage parentStage = Utils.currentStage(event);
-		createDialogForm("/gui/DepartmentForm.fxml", parentStage); // form to create
+		Department obj = new Department();
+		createDialogForm(obj, "/gui/DepartmentForm.fxml", parentStage); // form to create
 	
 	}
 	
@@ -81,16 +82,20 @@ public class DepartmentListController implements Initializable{
 		
 	}
 	
-	private void createDialogForm(String absoluteName, Stage parentStage) {   // to instantiate the dialog window - goal = create a new department
+	private void createDialogForm(Department obj, String absoluteName, Stage parentStage) {   // to instantiate the dialog window - goal = create a new department
 		
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));  //load view
 			Pane pane = loader.load();
 			
+			DepartmentFormController controller = loader.getController(); // get controller
+			controller.setDepartment(obj);  // insert obj into the controller
+			controller.updateFormData();  // load the contents of the obj into the form
+			
 			Stage dialogStage = new Stage();   // one stage in front of the other, so it is necessary to instantiate another stage
 			dialogStage.setTitle("Enter Department data");  // window title
 			dialogStage.setScene(new Scene(pane)); // What will the scene be? The loaded panel
-			dialogStage.setResizable(false);  // Can it be resizable or not?
+			dialogStage.setResizable(false);  // Can it be scaled or not?
 			dialogStage.initOwner(parentStage); 
 			dialogStage.initModality(Modality.WINDOW_MODAL);  // until you close the current window, you cannot access other windows
 			dialogStage.showAndWait();
