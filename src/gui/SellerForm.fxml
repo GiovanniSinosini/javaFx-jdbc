@@ -63,6 +63,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </Label>
+            <ComboBox fx:id="comboBoxDepartment" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>
